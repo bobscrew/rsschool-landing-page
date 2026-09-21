@@ -12,7 +12,7 @@ export const products = [
     brand: "Ajax",
     title: "Ajax Hub 2",
     description: "Радиоканальная панель с поддержкой фото-верификации тревог и работы без интернета.",
-    image: "resources/images/catalog/panels/ajax-hub-2.jpg",
+    image: "resources/images/catalog/panels/ajax-hub-2.png",
     basePrice: 320,
     currency: "$",
     params: [

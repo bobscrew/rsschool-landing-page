@@ -3,10 +3,10 @@ import { initTheme } from "./theme.js";
 
 const VISIBLE_INITIAL = 6;
 
-/* === Какие id категорий допустимы в URL === */
+
 const VALID_CATEGORY_IDS = categories.map(c => c.id);
 
-/* === Получить категорию из hash или вернуть первую === */
+
 function getCategoryFromHash() {
   const hash = decodeURIComponent(location.hash.replace("#", ""));
   return VALID_CATEGORY_IDS.includes(hash) ? hash : categories[0].id;
@@ -17,14 +17,14 @@ const state = {
   visibleCount: VISIBLE_INITIAL,
 };
 
-/* ============ DOM ============ */
-const grid         = document.getElementById("catalogGrid");
-const filtersRoot  = document.querySelector(".catalog__filters");
-const moreBtn      = document.querySelector("[data-show-more]");
-const countLabel   = document.querySelector("[data-catalog-count]");
-const metaLabel    = document.querySelector("[data-catalog-label]");
 
-/* ============ УТИЛИТЫ ============ */
+const grid = document.getElementById("catalogGrid");
+const filtersRoot = document.querySelector(".catalog__filters");
+const moreBtn = document.querySelector("[data-show-more]");
+const countLabel = document.querySelector("[data-catalog-count]");
+const metaLabel = document.querySelector("[data-catalog-label]");
+
+
 function getByCategory(categoryId) {
   return products.filter(p => p.category === categoryId);
 }
@@ -47,28 +47,54 @@ function placeholderSvg(product) {
   const brand = escapeXml(product.brand.toUpperCase());
   const title = escapeXml(product.title.toUpperCase());
 
+  let brandSize = 64;
+  if (brand.length > 8) brandSize = 56;
+  if (brand.length > 10) brandSize = 46;
+  if (brand.length > 14) brandSize = 36;
+
+  let titleSize = 28;
+  if (title.length > 14) titleSize = 22;
+  if (title.length > 20) titleSize = 18;
+  if (title.length > 28) titleSize = 15;
+
   return `
     <svg
       class="card__placeholder"
-      viewBox="0 0 800 600"
+      viewBox="0 0 800 800"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="${escapeXml(product.title)}"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
     >
-      <rect width="800" height="600" class="ph-bg"/>
+      <rect width="800" height="800" class="ph-bg"/>
       <g class="ph-grid">
-        <line x1="0"   y1="150" x2="800" y2="150"/>
-        <line x1="0"   y1="300" x2="800" y2="300"/>
-        <line x1="0"   y1="450" x2="800" y2="450"/>
-        <line x1="200" y1="0"   x2="200" y2="600"/>
-        <line x1="400" y1="0"   x2="400" y2="600"/>
-        <line x1="600" y1="0"   x2="600" y2="600"/>
+        <line x1="0"   y1="200" x2="800" y2="200"/>
+        <line x1="0"   y1="400" x2="800" y2="400"/>
+        <line x1="0"   y1="600" x2="800" y2="600"/>
+        <line x1="200" y1="0"   x2="200" y2="800"/>
+        <line x1="400" y1="0"   x2="400" y2="800"/>
+        <line x1="600" y1="0"   x2="600" y2="800"/>
       </g>
-      <text x="40" y="80"  class="ph-tag">// ${brand}</text>
-      <text x="40" y="490" class="ph-brand">${brand}</text>
-      <text x="40" y="545" class="ph-title">${title}</text>
-      <rect x="40" y="560" width="60" height="4" class="ph-accent"/>
+
+      <text
+        x="400"
+        y="400"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        class="ph-brand"
+        style="font-size: ${brandSize}px"
+      >${brand}</text>
+
+      <text
+        x="400"
+        y="460"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        class="ph-title"
+        style="font-size: ${titleSize}px"
+      >${title}</text>
+
+      <rect x="370" y="495" width="60" height="4" class="ph-accent"/>
     </svg>
   `;
 }
@@ -121,35 +147,8 @@ function cardTemplate(product) {
 window.makeFallbackSvg = function (productId) {
   const product = products.find(p => p.id === productId);
   if (!product) return "";
-
-  const brand = escapeXml(product.brand.toUpperCase());
-  const title = escapeXml(product.title.toUpperCase());
-
   const wrapper = document.createElement("div");
-  wrapper.innerHTML = `
-    <svg
-      class="card__placeholder"
-      viewBox="0 0 800 600"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="${escapeXml(product.title)}"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      <rect width="800" height="600" class="ph-bg"/>
-      <g class="ph-grid">
-        <line x1="0"   y1="150" x2="800" y2="150"/>
-        <line x1="0"   y1="300" x2="800" y2="300"/>
-        <line x1="0"   y1="450" x2="800" y2="450"/>
-        <line x1="200" y1="0"   x2="200" y2="600"/>
-        <line x1="400" y1="0"   x2="400" y2="600"/>
-        <line x1="600" y1="0"   x2="600" y2="600"/>
-      </g>
-      <text x="40" y="80"  class="ph-tag">// ${brand}</text>
-      <text x="40" y="490" class="ph-brand">${brand}</text>
-      <text x="40" y="545" class="ph-title">${title}</text>
-      <rect x="40" y="560" width="60" height="4" class="ph-accent"/>
-    </svg>
-  `;
+  wrapper.innerHTML = placeholderSvg(product);
   return wrapper.firstElementChild;
 };
 
@@ -201,14 +200,16 @@ function renderGrid() {
 
   grid.innerHTML = visible.map(cardTemplate).join("");
 
-  grid.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
-    });
-    card.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-      }
-    });
+  grid.querySelectorAll(".card__img").forEach(img => {
+    img.addEventListener("error", () => {
+      const id = img.dataset.id;
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = placeholderSvg(product);
+      img.replaceWith(wrapper.firstElementChild);
+    }, { once: true });
   });
 
 

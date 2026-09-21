@@ -30,7 +30,6 @@
   color: var(--text-muted);
 }
 
-
 .catalog {
   padding: 64px 0 80px;
 }
@@ -76,7 +75,6 @@
   opacity: 0.6;
 }
 
-
 .catalog__meta {
   display: flex;
   justify-content: space-between;
@@ -87,13 +85,10 @@
 
 .catalog__meta-label { color: var(--text-muted); }
 
-
 .catalog__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border-top: var(--border-w) solid var(--border);
-  border-left: var(--border-w) solid var(--border);
+  gap: 20px;
 }
 
 .card {
@@ -101,8 +96,7 @@
   display: flex;
   flex-direction: column;
   background: var(--bg-elevated);
-  border-right: var(--border-w) solid var(--border);
-  border-bottom: var(--border-w) solid var(--border);
+  border: var(--border-w) solid var(--border);
   cursor: pointer;
   transition: background-color var(--transition), color var(--transition);
 }
@@ -111,21 +105,26 @@
 
 .card:hover .card__desc,
 .card:hover .card__specs { color: inherit; opacity: 0.85; }
+
 .card:hover .card__price { color: var(--accent); }
 
 .card__media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--bg-elevated);
   border-bottom: var(--border-w) solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card__img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 24px;
   transition: transform 0.5s ease;
 }
 
@@ -153,6 +152,7 @@
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  z-index: 2;
 }
 
 .card__body {
@@ -220,24 +220,27 @@
   color: var(--text-muted);
 }
 
-
 .catalog__more-wrap {
   display: flex;
   justify-content: center;
   margin-top: 48px;
 }
 
-
 .ph-bg    { fill: var(--bg-elevated); }
 .ph-grid  { stroke: var(--text); stroke-width: 1; opacity: 0.12; }
-.ph-tag   { fill: var(--accent); font-family: "JetBrains Mono", monospace; font-size: 18px; letter-spacing: 4px; }
-.ph-brand { fill: var(--text); font-family: "Space Grotesk", sans-serif; font-size: 64px; font-weight: 700; letter-spacing: -2px; }
-.ph-title { fill: var(--text); font-family: "Space Grotesk", sans-serif; font-size: 24px; font-weight: 500; }
+.ph-brand { fill: var(--text); font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+.ph-title { fill: var(--text); font-family: "Space Grotesk", sans-serif; font-weight: 500; }
 .ph-accent { fill: var(--accent); }
 
+[data-theme="dark"] .ph-bg {
+  fill: #1A1A1A;
+}
 
 @media (max-width: 1024px) {
-  .catalog__grid { grid-template-columns: repeat(2, 1fr); }
+  .catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -254,7 +257,10 @@
 
   .filter-btn:last-child { border-bottom: none; }
 
-  .catalog__grid { grid-template-columns: 1fr; }
+  .catalog__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 380px) {
