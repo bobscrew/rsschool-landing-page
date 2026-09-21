@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог оборудования — Interactive Security</title>
+  <meta name="description" content="Каталог охранного оборудования: панели управления, извещатели и аксессуары с фильтрами по параметрам.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" aria-label="Interactive Security — на главную">
+        <span class="header__logo-mark">IS</span>
+        <span class="header__logo-text">Interactive&nbsp;Security</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html#catalog-preview">Категории</a></li>
+          <li><a class="nav__link" href="index.html#brands">Бренды</a></li>
+          <li><a class="nav__link" href="index.html#features">Преимущества</a></li>
+          <li><a class="nav__link" href="catalog.html" aria-current="page">Каталог</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button
+          class="theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Переключить тему"
+          data-theme-toggle
+        >
+          <span class="theme-toggle__track">
+            <span class="theme-toggle__thumb"></span>
+          </span>
+          <span class="theme-toggle__label mono" data-theme-label>LIGHT</span>
+        </button>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          data-burger
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <ul class="mobile-menu__list">
+        <li><a href="index.html#catalog-preview">Категории</a></li>
+        <li><a href="index.html#brands">Бренды</a></li>
+        <li><a href="index.html#features">Преимущества</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO КАТАЛОГА ============ -->
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="catalog-hero__top">
+          <span class="mono">[ CATALOG / 00 ]</span>
+          <span class="mono catalog-hero__count" data-catalog-count>—</span>
+        </div>
+        <h1 class="catalog-hero__title">Каталог оборудования</h1>
+        <p class="catalog-hero__lead">
+          Панели управления, извещатели и аксессуары — с фильтрами по категориям
+          и параметрами совместимости в каждой карточке.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ ФИЛЬТРЫ КАТЕГОРИЙ ============ -->
+    <section class="catalog" aria-labelledby="catalog-list-title">
+      <div class="container">
+
+        <h2 id="catalog-list-title" class="visually-hidden">Список товаров каталога</h2>
+
+        <div class="catalog__filters" role="tablist" aria-label="Категории каталога">
+          <!-- категории рендерятся JS-ом из categories -->
+        </div>
+
+        <div class="catalog__meta">
+          <span class="mono catalog__meta-label" data-catalog-label>
+            // Показано: —
+          </span>
+        </div>
+
+        <!-- Сетка карточек -->
+        <div class="catalog__grid" id="catalogGrid" aria-live="polite">
+          <!-- карточки рендерятся JS-ом -->
+        </div>
+
+        <!-- Кнопка "показать ещё" -->
+        <div class="catalog__more-wrap">
+          <button
+            class="btn catalog__more"
+            type="button"
+            data-show-more
+            hidden
+          >
+            Показать ещё →
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__top">
+        <a href="index.html" class="footer__logo" aria-label="Interactive Security — на главную">
+          <span class="footer__logo-mark">IS</span>
+          <span class="footer__logo-text">Interactive&nbsp;Security</span>
+        </a>
+        <p class="footer__copy mono">© 2026 — ALL RIGHTS RESERVED</p>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__col">
+          <h2 class="footer__heading mono">// Контакты</h2>
+          <ul class="footer__list">
+            <li><a href="tel:+375291234567" class="footer__link">+375 (29) 123-45-67</a></li>
+            <li><a href="mailto:info@interactive-security.by" class="footer__link">info@interactive-security.by</a></li>
+            <li>
+              <a href="https://yandex.by/maps/?text=Минск,ул.Октябрьская,10"
+                 target="_blank" rel="noopener noreferrer" class="footer__link">
+                г. Минск, ул. Октябрьская, 10
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__heading mono">// Связь</h3>
+          <ul class="footer__list">
+            <li><a href="https://github.com/bobscrew" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub ↗</a></li>
+            <li><a href="https://t.me/CIUNIT" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram ↗</a></li>
+            <li><a href="https://rs.school/" target="_blank" rel="noopener noreferrer" class="footer__link">RS School ↗</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__heading mono">// О проекте</h2>
+          <p class="footer__text">
+            Агрегатор охранного оборудования: панели, извещатели и аксессуары
+            с проверкой совместимости и фильтрами по параметрам.
+          </p>
+          <p class="footer__text mono footer__version">v1.0 / build 2026</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span class="mono">INTERACTIVE SECURITY — EQUIPMENT AGGREGATOR</span>
+        <span class="mono">MADE WITH ❤️ FOR RS SCHOOL</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="js/catalog.js"></script>
+</body>
+</html>
