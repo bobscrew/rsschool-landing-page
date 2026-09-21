@@ -4,7 +4,8 @@
 с проверкой совместимости и фильтрами по параметрам.
 
 ## Live Demo
-Ссылка будет добавлена после деплоя.
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://bobscrew.github.io/rsschool-landing-page/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](#)
 
 ## Технологии
 - HTML5 (semantic markup)
