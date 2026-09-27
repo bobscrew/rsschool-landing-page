@@ -1,4 +1,7 @@
 .modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   border: var(--border-w) solid var(--border);
   background: var(--bg);
   color: var(--text);
