@@ -62,7 +62,7 @@ h3 {
     border-color var(--transition);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn:hover {
     background: var(--accent);
     border-color: var(--accent);
@@ -75,7 +75,7 @@ h3 {
   color: var(--text);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn--ghost:hover {
     background: var(--text);
     border-color: var(--text);

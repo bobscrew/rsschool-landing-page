@@ -302,8 +302,8 @@ body.modal-open {
   line-height: 1.15;
 }
 
-/* ============ HOVER-СОСТОЯНИЯ (только для устройств с мышью) ============ */
-@media (hover: hover) {
+/* HOVER-СОСТОЯНИЯ (только для устройств с мышью) */
+@media (hover: hover) and (pointer: fine) {
   .modal__inner::-webkit-scrollbar-thumb:hover {
     background: var(--border);
   }

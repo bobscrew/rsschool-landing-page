@@ -141,15 +141,6 @@
   transition: background-color var(--transition), color var(--transition);
 }
 
-.category-card:hover {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
-}
-
-.category-card:hover .category-card__more {
-  color: var(--accent);
-}
-
 .category-card__num {
   position: absolute;
   top: 16px;
@@ -240,10 +231,6 @@
   transition: color var(--transition);
 }
 
-.slide__link:hover {
-  color: var(--accent);
-}
-
 .slider__controls {
   display: flex;
   justify-content: space-between;
@@ -263,12 +250,6 @@
   font-size: 20px;
   cursor: pointer;
   transition: background-color var(--transition), color var(--transition);
-}
-
-.slider__btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
 }
 
 .slider__dots {
@@ -409,7 +390,33 @@
   font-size: 14px;
 }
 
-/* ============ МОБИЛЬНОЕ МЕНЮ (заготовка под часть 2) ============ */
+/* ============ HOVER-СОСТОЯНИЯ (только для устройств с мышью) ============ */
+@media (hover: hover) and (pointer: fine) {
+  .category-card:hover {
+    background: var(--bg-inverse);
+    color: var(--text-inverse);
+  }
+
+  .category-card:hover .category-card__more {
+    color: var(--accent);
+  }
+
+  .slide__link:hover {
+    color: var(--accent);
+  }
+
+  .slider__btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .mobile-menu__list a:hover {
+    color: var(--accent);
+  }
+}
+
+/* ============ МОБИЛЬНОЕ МЕНЮ ============ */
 .mobile-menu {
   display: none;
 }
@@ -454,10 +461,6 @@
     color: var(--text);
     text-decoration: none;
     transition: color var(--transition);
-  }
-
-  .mobile-menu__list a:hover {
-    color: var(--accent);
   }
 }
 

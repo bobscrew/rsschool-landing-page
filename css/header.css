@@ -157,7 +157,7 @@
 }
 
 /* HOVER-СОСТОЯНИЯ (только для устройств с мышью) */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .nav__link:hover {
     color: var(--accent);
   }
