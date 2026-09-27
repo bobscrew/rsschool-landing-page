@@ -1,6 +1,7 @@
 import { categories, products } from "./data/products.js";
 import { initTheme } from "./theme.js";
 import { initBurger } from "./burger.js";
+import { initModal, openModal } from "./modal.js";
 
 const VISIBLE_INITIAL = 6;
 
@@ -213,13 +214,27 @@ function renderGrid() {
     }, { once: true });
   });
 
+  grid.querySelectorAll(".card").forEach(card => {
+    const product = products.find(p => p.id === card.dataset.id);
+    if (!product) return;
+
+    card.addEventListener("click", () => {
+      openModal(product);
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(product);
+      }
+    });
+  });
 
   const hasMore = list.length > state.visibleCount;
   moreBtn.hidden = !hasMore;
   if (hasMore) {
     moreBtn.textContent = `Показать ещё → (${list.length - state.visibleCount})`;
   }
-
 
   const catName = categories.find(c => c.id === state.activeCategory)?.name ?? "";
   metaLabel.textContent = `// Категория: ${catName} — показано ${visible.length} из ${list.length}`;
@@ -257,6 +272,7 @@ window.addEventListener("hashchange", () => {
 function init() {
   initTheme();
   initBurger();
+  initModal();
   renderCount();
   renderFilters();
   renderGrid();
