@@ -118,20 +118,40 @@
 
 .burger {
   display: none;
+  position: relative;
   width: 44px;
   height: 44px;
-  padding: 10px;
+  padding: 0;
   background: var(--bg-inverse);
   border: var(--border-w) solid var(--border);
   cursor: pointer;
-  flex-direction: column;
-  justify-content: space-between;
 }
+
 .burger span {
-  display: block;
+  position: absolute;
+  left: 10px;
+  right: 10px;
   height: 2px;
   background: var(--text-inverse);
   transition: transform var(--transition), opacity var(--transition);
+}
+
+.burger span:nth-child(1) { top: 14px; }
+.burger span:nth-child(2) { top: 21px; }
+.burger span:nth-child(3) { top: 28px; }
+
+.burger.is-open span:nth-child(1) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+
+.burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.is-open span:nth-child(3) {
+  top: 21px;
+  transform: rotate(-45deg);
 }
 
 

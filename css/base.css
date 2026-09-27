@@ -13,7 +13,6 @@ body {
   color: var(--text);
   line-height: 1.5;
   min-height: 100vh;
-  overflow-x: clip;
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -43,7 +42,6 @@ h1, h2, h3 {
   text-transform: uppercase;
 }
 
-/* Кнопки */
 .btn {
   display: inline-flex;
   align-items: center;

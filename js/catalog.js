@@ -1,5 +1,6 @@
 import { categories, products } from "./data/products.js";
 import { initTheme } from "./theme.js";
+import { initBurger } from "./burger.js";
 
 const VISIBLE_INITIAL = 6;
 
@@ -255,6 +256,7 @@ window.addEventListener("hashchange", () => {
 
 function init() {
   initTheme();
+  initBurger();
   renderCount();
   renderFilters();
   renderGrid();
