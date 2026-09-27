@@ -219,13 +219,13 @@ function renderGrid() {
     if (!product) return;
 
     card.addEventListener("click", () => {
-      openModal(product);
+      openModal(product, products);
     });
 
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        openModal(product);
+        openModal(product, products);
       }
     });
   });
@@ -238,17 +238,6 @@ function renderGrid() {
 
   const catName = categories.find(c => c.id === state.activeCategory)?.name ?? "";
   metaLabel.textContent = `// Категория: ${catName} — показано ${visible.length} из ${list.length}`;
-
-  card.addEventListener("click", () => {
-    openModal(product, products);
-  });
-
-  card.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openModal(product, products);
-    }
-  });
 }
 
 
