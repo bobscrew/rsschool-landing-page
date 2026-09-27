@@ -27,7 +27,9 @@ section {
   scroll-margin-top: 96px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -56,14 +58,16 @@ h1, h2, h3 {
   color: var(--text-inverse);
   cursor: pointer;
   transition: background-color var(--transition),
-              color var(--transition),
-              border-color var(--transition);
+    color var(--transition),
+    border-color var(--transition);
 }
 
-.btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+@media (hover: hover) {
+  .btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
 }
 
 .btn--ghost {
@@ -71,12 +75,29 @@ h1, h2, h3 {
   color: var(--text);
 }
 
-.btn--ghost:hover {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--bg);
+@media (hover: hover) {
+  .btn--ghost:hover {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
 }
 
 .btn[hidden] {
   display: none;
+}
+
+/* ============ МОБИЛЬНАЯ ОПТИМИЗАЦИЯ ТАПОВ ============ */
+button,
+a,
+.card,
+.filter-btn,
+.modal__param-option,
+.modal__compat-link,
+.category-card,
+.slider__btn,
+.burger,
+.theme-toggle {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }

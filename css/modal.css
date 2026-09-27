@@ -38,10 +38,6 @@
   background: var(--border-thin);
 }
 
-.modal__inner::-webkit-scrollbar-thumb:hover {
-  background: var(--border);
-}
-
 .modal__close {
   position: absolute;
   top: 16px;
@@ -71,15 +67,6 @@
 
 .modal__close span:nth-child(2) {
   transform: rotate(-45deg);
-}
-
-.modal__close:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.modal__close:hover span {
-  background: #fff;
 }
 
 .modal__media {
@@ -207,35 +194,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .modal__inner {
-    padding: 32px 24px;
-  }
-
-  .modal__specs {
-    grid-template-columns: 1fr;
-  }
-
-  .modal__close {
-    top: 12px;
-    right: 12px;
-  }
-}
-
-@media (max-width: 380px) {
-  .modal__inner {
-    padding: 24px 16px;
-  }
-
-  .modal__title {
-    font-size: 22px;
-  }
-
-  .modal__price {
-    font-size: 26px;
-  }
-}
-
 .modal__params {
   display: flex;
   flex-direction: column;
@@ -276,11 +234,6 @@ body.modal-open {
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
-}
-
-.modal__param-option:hover {
-  background: var(--text);
-  color: var(--bg);
 }
 
 .modal__param-option.is-active {
@@ -335,11 +288,6 @@ body.modal-open {
   transition: background-color var(--transition), color var(--transition);
 }
 
-.modal__compat-link:hover {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
-}
-
 .modal__compat-brand {
   font-size: 9px;
   letter-spacing: 0.15em;
@@ -354,8 +302,63 @@ body.modal-open {
   line-height: 1.15;
 }
 
+/* ============ HOVER-СОСТОЯНИЯ (только для устройств с мышью) ============ */
+@media (hover: hover) {
+  .modal__inner::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+  }
+
+  .modal__close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .modal__close:hover span {
+    background: #fff;
+  }
+
+  .modal__param-option:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .modal__compat-link:hover {
+    background: var(--bg-inverse);
+    color: var(--text-inverse);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal__inner {
+    padding: 32px 24px;
+  }
+
+  .modal__specs {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__close {
+    top: 12px;
+    right: 12px;
+  }
+}
+
 @media (max-width: 480px) {
   .modal__compat-list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .modal__inner {
+    padding: 24px 16px;
+  }
+
+  .modal__title {
+    font-size: 22px;
+  }
+
+  .modal__price {
+    font-size: 26px;
   }
 }
