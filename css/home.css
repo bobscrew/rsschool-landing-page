@@ -371,6 +371,7 @@
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
+  text-wrap-mode: wrap;
 }
 
 .cta__title-accent {

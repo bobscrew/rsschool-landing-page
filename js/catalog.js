@@ -19,16 +19,20 @@ const state = {
   visibleCount: VISIBLE_INITIAL,
 };
 
-
 const grid = document.getElementById("catalogGrid");
 const filtersRoot = document.querySelector(".catalog__filters");
 const moreBtn = document.querySelector("[data-show-more]");
 const countLabel = document.querySelector("[data-catalog-count]");
 const metaLabel = document.querySelector("[data-catalog-label]");
 
+const productsByCategory = new Map();
+for (const p of products) {
+  if (!productsByCategory.has(p.category)) productsByCategory.set(p.category, []);
+  productsByCategory.get(p.category).push(p);
+}
 
-function getByCategory(categoryId) {
-  return products.filter(p => p.category === categoryId);
+function getByCategory(id) {
+  return productsByCategory.get(id) || [];
 }
 
 function formatPrice(n, currency = "$") {
