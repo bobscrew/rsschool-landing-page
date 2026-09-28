@@ -143,8 +143,7 @@
 .burger span:nth-child(3) { top: 28px; }
 
 .burger.is-open span:nth-child(1) {
-  top: 21px;
-  transform: rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .burger.is-open span:nth-child(2) {
@@ -152,8 +151,7 @@
 }
 
 .burger.is-open span:nth-child(3) {
-  top: 21px;
-  transform: rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* HOVER-СОСТОЯНИЯ (только для устройств с мышью) */
