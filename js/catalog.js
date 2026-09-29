@@ -1,5 +1,7 @@
 import { categories, products } from "./data/products.js";
 import { initTheme } from "./theme.js";
+import { initBurger } from "./burger.js";
+import { initModal, openModal } from "./modal.js";
 
 const VISIBLE_INITIAL = 6;
 
@@ -17,16 +19,20 @@ const state = {
   visibleCount: VISIBLE_INITIAL,
 };
 
-
 const grid = document.getElementById("catalogGrid");
 const filtersRoot = document.querySelector(".catalog__filters");
 const moreBtn = document.querySelector("[data-show-more]");
 const countLabel = document.querySelector("[data-catalog-count]");
 const metaLabel = document.querySelector("[data-catalog-label]");
 
+const productsByCategory = new Map();
+for (const p of products) {
+  if (!productsByCategory.has(p.category)) productsByCategory.set(p.category, []);
+  productsByCategory.get(p.category).push(p);
+}
 
-function getByCategory(categoryId) {
-  return products.filter(p => p.category === categoryId);
+function getByCategory(id) {
+  return productsByCategory.get(id) || [];
 }
 
 function formatPrice(n, currency = "$") {
@@ -212,13 +218,27 @@ function renderGrid() {
     }, { once: true });
   });
 
+  grid.querySelectorAll(".card").forEach(card => {
+    const product = products.find(p => p.id === card.dataset.id);
+    if (!product) return;
+
+    card.addEventListener("click", () => {
+      openModal(product, products);
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(product, products);
+      }
+    });
+  });
 
   const hasMore = list.length > state.visibleCount;
   moreBtn.hidden = !hasMore;
   if (hasMore) {
     moreBtn.textContent = `Показать ещё → (${list.length - state.visibleCount})`;
   }
-
 
   const catName = categories.find(c => c.id === state.activeCategory)?.name ?? "";
   metaLabel.textContent = `// Категория: ${catName} — показано ${visible.length} из ${list.length}`;
@@ -255,6 +275,8 @@ window.addEventListener("hashchange", () => {
 
 function init() {
   initTheme();
+  initBurger();
+  initModal(products);
   renderCount();
   renderFilters();
   renderGrid();
